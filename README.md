@@ -6,8 +6,9 @@ For example, the NFT may represent a simple JPEG.  In this case, the document po
 a description of the collectible, and a link to the JPEG, along with a SHA-256 hash of the JPEG to confirm its 
 authenticity.  
 
-We have published a JSON Schema for documents describing NFTs, with provision for copyright notices, terms and conditions,
-and a chain of authenticity for all digital assets needed to represent the token.  
+We have published JSON Schema for describing NFTs, with provision for copyright notices, terms and conditions,
+and a chain of authenticity for all digital assets needed to represent the token.  These schema are compatible with
+Ethereum ERC721 and Bitcoin Cash SLP tokens.
 
 ### Chain of Authenticity
 
