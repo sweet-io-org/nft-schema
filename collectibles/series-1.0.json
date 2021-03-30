@@ -1,0 +1,374 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://collectible.sweet.io/schema/series_1.0",
+    "definitions": {
+        "media_file": {
+            "type": "object",
+            "title": "Media File",
+            "description": "A Media File (image, video, mp3) associated with the collectible",
+            "anyOf": [
+                {
+                    "required": [
+                        "uri"
+                    ]
+                },
+                {
+                    "required": [
+                        "url"
+                    ]
+                }
+            ],
+            "required": [
+                "sha256",
+                "content-type"
+            ],
+            "properties": {
+                "url": {
+                    "type": "string",
+                    "title": "URL",
+                    "description": "URL which can be used to retrieve the asset."
+                },
+                "uri": {
+                    "type": "string",
+                    "title": "URI",
+                    "description": "A unique identifier for the asset."
+                },
+                "sha256": {
+                    "type": "string",
+                    "title": "SHA256",
+                    "description": "The SHA256 hash, base64 encoded, of the digital asset."
+                },
+                "content-type": {
+                    "type": "string",
+                    "title": "Content-Type",
+                    "description": "The MIME content-type of the asset."
+                },
+                "gateway": {
+                    "type": "string",
+                    "title": "Gateway",
+                    "description": "An optional gateway used to check permissions for access to the media.  Typically used for items such as MP4 where distribution is intended to be limited, or accessed only by the token owner."
+                },
+                "purpose": {
+                    "type": "string",
+                    "title": "Purpose",
+                    "description": "The purpose of the media file, intended to be machine-readable, for example 'moments-video'."
+                },
+                "copyright_notice": {
+                    "type": "string",
+                    "title": "Copyright Notice",
+                    "description": "Copyright notice for the digital asset, if different from the copyright notice for the NFT"
+                }
+            }
+        }
+    },
+    "type": "object",
+    "title": "Digital Collectible Series",
+    "description": "A digital collectible series.  An individual collectible will be a member of a series with a unique sequence_number.",
+    "required": [
+        "creator",
+        "rights_info",
+        "name",
+        "issued",
+        "series",
+        "uri"
+    ],
+    "properties": {
+        "creator": {
+            "$id": "#/properties/creator",
+            "type": "object",
+            "title": "Creator",
+            "description": "The creator of the token.",
+            "required": [
+                "name",
+                "uri"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "title": "Name",
+                    "description": "Name of the creator."
+                },
+                "uri": {
+                    "type": "string",
+                    "title": "URI",
+                    "description": "URI for the creator, either a URL or other unique identifier."
+                }
+            },
+            "additionalProperties": true
+        },
+        "rights_info": {
+            "$id": "#/properties/rights_info",
+            "type": "object",
+            "title": "Rights Information",
+            "description": "Explanation of rights, copyright, and terms and conditions associated with the Token.",
+            "required": [
+                "copyright_holder",
+                "copyright_notice",
+                "terms_and_conditions"
+            ],
+            "properties": {
+                "copyright_holder": {
+                    "type": "string",
+                    "title": "Copyright Holder",
+                    "description": "The name of the copyright holder."
+                },
+                "copyright_notice": {
+                    "type": "string",
+                    "title": "Copyright Notice",
+                    "description": "The copyright notice, for example Copyright (C) (2021) MyCompany Inc, all rights reserved."
+                },
+                "terms_and_conditions": {
+                    "type": "object",
+                    "title": "Terms and Conditions",
+                    "description": "An explanation of the terms and conditions associated with owning the Token.",
+                    "required": [
+                        "url",
+                        "sha256"
+                    ],
+                    "properties": {
+                        "url": {
+                            "type": "string",
+                            "title": "T&C URL",
+                            "description": "A URL from which the terms and conditions can be retrieved."
+                        },
+                        "sha256": {
+                            "type": "string",
+                            "title": "SHA256",
+                            "description": "The sha256 hash of the Terms and Conditions provided by the T&C URL, base64-encoded."
+                        }
+                    },
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true
+        },
+        "name": {
+            "$id": "#/properties/name",
+            "type": "string",
+            "title": "Name",
+            "description": "The display name for the Series."
+        },
+        "issued": {
+            "$id": "#/properties/issued",
+            "type": "string",
+            "title": "Issued Timestamp",
+            "description": "The timestamp of when the token was first issued, ISO 8601 format in UTC."
+        },
+        "series": {
+            "$id": "#/properties/series",
+            "type": "object",
+            "title": "Collectible Series",
+            "description": "Information on the Series of which this Token is a member.",
+            "required": [
+                "display_meta",
+                "total_number",
+                "uri"
+            ],
+            "properties": {
+                "display_meta": {
+                    "type": "object",
+                    "title": "Display Metadata",
+                    "description": "Information needed to display the token.",
+                    "required": [
+                        "name",
+                        "description"
+                    ],
+                    "properties": {
+                        "genre": {
+                            "type": "string",
+                            "title": "Genre",
+                            "description": "A genre associated with the token, for example music, sports"
+                        },
+                        "name": {
+                            "type": "string",
+                            "title": "Name",
+                            "description": "The display name for the series."
+                        },
+                        "color": {
+                            "type": "string",
+                            "title": "Color",
+                            "description": "Color used in the display of cards and coins."
+                        },
+                        "metalness": {
+                            "type": "number",
+                            "title": "Metalness",
+                            "description": "threeJS metalness"
+                        },
+                        "roughness": {
+                            "type": "number",
+                            "title": "Roughness",
+                            "description": "threeJS roughness"
+                        },
+                        "description": {
+                            "type": "string",
+                            "title": "Description",
+                            "description": "A longer description of the token, used for display."
+                        },
+                        "type": {
+                            "type": "string",
+                            "title": "Type",
+                            "description": "A type used to control rendering, for example card or coin."
+                        },
+                        "creator_campaign_id": {
+                            "type": "integer",
+                            "title": "Creator Campaign ID",
+                            "description": "A creator campaign associated with the series, used to identify collections."
+                        },
+                        "rarity": {
+                            "type": "object",
+                            "title": "Rarity",
+                            "description": "The rarity of the token",
+                            "required": [
+                                "name",
+                                "rank"
+                            ],
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "title": "Name",
+                                    "description": "Rarity name."
+                                },
+                                "rank": {
+                                    "type": "integer",
+                                    "title": "Rank",
+                                    "description": "Numerical rank of the rarity, with 1 being common, higher numbers being progressively more rare."
+                                }
+                            },
+                            "additionalProperties": true
+                        },
+                        "creator_campaign": {
+                            "type": "object",
+                            "title": "Creator Campaign",
+                            "description": "A campaign associated with the Series.",
+                            "required": [
+                                "name",
+                                "description"
+                            ],
+                            "properties": {
+                                "campaign_id": {
+                                    "type": "integer",
+                                    "title": "Campaign ID",
+                                    "description": "Identifier for the campaign."
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "title": "Name",
+                                    "description": "Name of the campaign."
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "title": "Description",
+                                    "description": "Description of the campaign."
+                                },
+                                "client": {
+                                    "type": "object",
+                                    "title": "Client",
+                                    "description": "Client information associated with the campaign (company or person).",
+                                    "required": [
+                                        "name",
+                                        "company"
+                                    ],
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "title": "Name",
+                                            "description": "Name of the client running the campaign."
+                                        },
+                                        "company": {
+                                            "type": "string",
+                                            "title": "Company",
+                                            "description": "Company associated with the client."
+                                        }
+                                    },
+                                    "additionalProperties": true
+                                }
+                            },
+                            "additionalProperties": true
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "total_number": {
+                    "type": "integer",
+                    "title": "Total Number",
+                    "description": "Total number of tokens available for the Series."
+                },
+                "uri": {
+                    "type": "string",
+                    "title": "URI",
+                    "description": "URI identifying the series."
+                }
+            },
+            "additionalProperties": true
+        },
+        "type": {
+            "$id": "#/properties/type",
+            "type": "string",
+            "title": "Type",
+            "description": "The type of NFT, for example 'slp' for bitcoin-cash SLP tokens, or 'erc721' for Ethereum style tokens."
+        },
+        "uri": {
+            "$id": "#/properties/uri",
+            "type": "string",
+            "title": "URI",
+            "description": "The URI identifying the individual Token."
+        },
+        "assets": {
+            "$id": "#/properties/assets",
+            "type": "object",
+            "title": "Assets",
+            "description": "Media or other assets associated with the series, required to render a collectible.",
+            "required": [
+                "front_image",
+                "reverse_image",
+                "media"
+            ],
+            "properties": {
+                "front_image": {
+                    "$ref": "#/definitions/media_file"
+                },
+                "reverse_image": {
+                    "$ref": "#/definitions/media_file"
+                },
+                "media": {
+                    "type": "array",
+                    "title": "Media",
+                    "description": "Additional media associated with the collectible.",
+                    "additionalItems": true,
+                    "items": {
+                        "$ref": "#/definitions/media_file"
+                    }
+                }
+            },
+            "additionalProperties": {
+                "$ref": "#/definitions/media_file"
+            }
+        },
+        "images": {
+            "$id": "#/properties/images",
+            "type": "object",
+            "title": "Series Images",
+            "description": "Images that can be used to represent the Series.",
+            "required": [
+                "front",
+                "reverse"
+            ],
+            "properties": {
+                "front": {
+                    "$ref": "#/definitions/media_file"
+                },
+                "reverse": {
+                    "$ref": "#/definitions/media_file"
+                }
+            },
+            "additionalProperties": {
+                "$ref": "#/definitions/media_file"
+            }
+        },
+        "image": {
+            "$ref": "#/definitions/media_file",
+            "description": "Preferred image for representation of the series."
+        }
+    },
+    "additionalProperties": true
+}
