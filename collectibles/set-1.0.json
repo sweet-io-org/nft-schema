@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://collectible.sweet.io/schema/set_1.0",
+  "$id": "https://collectible.sweet.io/schema/set-1.0",
   "definitions": {
         "media_file": {
             "type": "object",
